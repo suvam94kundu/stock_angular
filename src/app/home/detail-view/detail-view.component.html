@@ -1,0 +1,11 @@
+<div class="back"><button class="btn btn-outline-secondary" (click)="routeBack()">Back</button></div>
+<div class="card">
+    <h3 class="card-header" style="margin-top: 0 !important;"><app-detailviewheader [stockDetail]="stockDetail"></app-detailviewheader></h3>
+    <div class="card-block">
+        <ejs-chart [primaryXAxis]="xAxis" [primaryYAxis]="YAxis" [title]='title' [tooltip]='toolTipSettings' [crosshair]="crossSettings">
+            <e-series-collection>
+                <e-series [dataSource]='chartData' type='HiloOpenClose' xName='date' high='high' low='low' open='open' close ='close' volume='volume' name='{{stockDetail.company}}'></e-series>
+            </e-series-collection>
+        </ejs-chart>
+    </div>
+  </div>

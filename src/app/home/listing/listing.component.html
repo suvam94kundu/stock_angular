@@ -1,0 +1,63 @@
+<div class="newBtn"><button class="btn btn-lg btn-outline-secondary" (click)="open(mymodal)">Add a New Symbol</button></div>
+<div>
+    <ag-grid-angular style="width: 750px;height: 500px;" [rowHeight]="rowHeight" [rowStyle]="rowStyle" class="ag-theme-balham" [rowData]="rowData"
+        (rowClicked)="onRowClick($event)" [frameworkComponents]="frameworkComponents" [columnDefs]="columnDefs">
+    </ag-grid-angular>
+    <!-- <igx-grid #grid1 id="grid1" [data]="stocks" [autoGenerate]="true"></igx-grid> -->
+</div>
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">New Stock Entry</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #stockForm="ngForm" (ngSubmit)="savetoJSON(stockForm)"> 
+            <div class="md-form">
+                <label for="form1" class="">Company</label>
+                <input mdbInput type="text" [(ngModel)]="company" name="company" required id="company" class="form-control">
+            </div>
+            <div class="md-form">
+                <label for="form1" class="">Symbol</label>
+                <input mdbInput type="text" [(ngModel)]="symbol" name="symbol" required id="symbol" class="form-control">
+            </div>
+            <div class="md-form">
+                <label for="form1" class="">Initial Price</label>
+                <input mdbInput type="number" [(ngModel)]="initial_price" required name="initial_price" id="initial_price" class="form-control">
+            </div>
+            <div class="md-form">
+                <label for="form1" class="">Price 2002</label>
+                <input mdbInput type="number" [(ngModel)]="price_2002" required name="price_2002" id="price_2002" class="form-control">
+            </div>
+            <div class="md-form">
+                <label for="form1" class="">Price 2007</label>
+                <input mdbInput type="number" [(ngModel)]="price_2007" required name="price_2007" id="price_2007" class="form-control">
+            </div>
+            <div class="md-form" style="text-align: center;">
+                <button type="submit" style="margin: 27px 10px 0px 10px;" [disabled]="!stockForm.valid" class="btn btn-outline-dark">Add Stock</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #confirm let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">ALERT</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+          <label>Do you want to delete this Stock Data?</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+      <button type="button" class="btn btn-outline-dark" (click)="delete()">Yes</button>
+    </div>
+  </ng-template>
+
+<!-- modal.close('Save click') -->
